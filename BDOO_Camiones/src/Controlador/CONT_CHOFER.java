@@ -7,14 +7,16 @@ package Controlador;
 
 import Modelo.OAD_CHOFER;
 import Vista.CRUD_CHOFER;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Koe
  */
-/*public class CONT_CHOFER implements ActionListener, KeyListener {
+public class CONT_CHOFER implements ActionListener {
 
     CRUD_CHOFER VISTA = new CRUD_CHOFER();
     OAD_CHOFER MODELO = new OAD_CHOFER();
@@ -24,6 +26,22 @@ import java.awt.event.KeyListener;
         this.VISTA = VISTA;
         this.VISTA.btnINSERTAR.addActionListener(this);
         this.VISTA.btnVOLVER.addActionListener(this);
-        this.VISTA.txtRUT.addKeyListener(this);
+        //this.VISTA.txtRUT.addKeyListener(this);
     }
-}*/
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == VISTA.btnINSERTAR) {
+            VISTA.txtRUT.setText("");
+            JOptionPane.showMessageDialog(null, "LIMPIADO");
+
+        }
+
+        if (e.getSource() == VISTA.btnVOLVER) {
+            JOptionPane.showMessageDialog(null, "BOTON VOLVER");
+        }
+
+    }
+
+}
