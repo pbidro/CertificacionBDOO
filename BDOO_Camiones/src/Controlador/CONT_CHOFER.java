@@ -5,12 +5,15 @@
  */
 package Controlador;
 
+import Metodo.SOLO_LETRAS;
 import Modelo.OAD_CHOFER;
 import Vista.CRUD_CHOFER;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -40,6 +43,26 @@ public class CONT_CHOFER implements ActionListener {
 
         if (e.getSource() == VISTA.btnVOLVER) {
             JOptionPane.showMessageDialog(null, "BOTON VOLVER");
+        }
+
+    }
+
+    public void keyTyped(KeyEvent e) {
+
+        if (e.getSource() == VISTA.txtRUT) {
+
+        }
+
+        if (e.getSource() == VISTA.txtNOMBRE) {
+            if (SOLO_LETRAS.SoloLetras(e, VISTA.txtNOMBRE.getText(), 5) == true) {
+            } else {
+                e.consume();
+
+            }
+        }
+
+        if (e.getSource() == VISTA.txtAPELLIDO) {
+
         }
 
     }

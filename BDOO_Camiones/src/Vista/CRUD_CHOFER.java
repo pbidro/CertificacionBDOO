@@ -62,11 +62,6 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
 
         jLabel2.setText("NOMBRE:");
 
-        txtNOMBRE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNOMBREActionPerformed(evt);
-            }
-        });
         txtNOMBRE.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNOMBREKeyTyped(evt);
@@ -147,10 +142,6 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRUTActionPerformed
 
-    private void txtNOMBREActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNOMBREActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNOMBREActionPerformed
-
     private void txtAPELLIDOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAPELLIDOActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAPELLIDOActionPerformed
@@ -161,11 +152,7 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
 
     private void txtNOMBREKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNOMBREKeyTyped
 
-        if (SOLO_LETRAS.SoloLetras(evt, txtNOMBRE.getText(), 5) == true) {
-        } else {
-            evt.consume();
-            getToolkit().beep();
-        }
+
 
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNOMBREKeyTyped
