@@ -5,9 +5,7 @@
  */
 package Vista;
 
-import Metodo.LIMITAR_LARGO;
 import Metodo.SOLO_LETRAS;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,57 +30,62 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtRUT = new javax.swing.JTextField();
+        btnINSERTAR = new javax.swing.JButton();
+        btnVOLVER = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        NOM = new javax.swing.JTextField();
+        txtNOMBRE = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtAPELLIDO = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtINGRESO = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("RUT:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtRUT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtRUTActionPerformed(evt);
             }
         });
 
-        jButton1.setText("INSERTAR");
+        btnINSERTAR.setText("INSERTAR");
 
-        jButton2.setText("VOLVER");
+        btnVOLVER.setText("VOLVER");
+        btnVOLVER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVOLVERActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("NOMBRE:");
 
-        NOM.addActionListener(new java.awt.event.ActionListener() {
+        txtNOMBRE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NOMActionPerformed(evt);
+                txtNOMBREActionPerformed(evt);
             }
         });
-        NOM.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNOMBRE.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                NOMKeyTyped(evt);
+                txtNOMBREKeyTyped(evt);
             }
         });
 
         jLabel3.setText("APELLIDO:");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtAPELLIDO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtAPELLIDOActionPerformed(evt);
             }
         });
 
         jLabel4.setText("INGRESO:");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtINGRESO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtINGRESOActionPerformed(evt);
             }
         });
 
@@ -98,15 +101,15 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnVOLVER, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnINSERTAR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                        .addComponent(txtRUT, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(NOM, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtNOMBRE, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtAPELLIDO, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(txtINGRESO, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -117,60 +120,59 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(5, 5, 5)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtRUT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel2)
                 .addGap(5, 5, 5)
-                .addComponent(NOM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNOMBRE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel3)
                 .addGap(5, 5, 5)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtAPELLIDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel4)
                 .addGap(5, 5, 5)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtINGRESO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnINSERTAR)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnVOLVER)
                 .addGap(10, 10, 10))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtRUTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRUTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtRUTActionPerformed
 
-    private void NOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NOMActionPerformed
+    private void txtNOMBREActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNOMBREActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NOMActionPerformed
+    }//GEN-LAST:event_txtNOMBREActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtAPELLIDOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAPELLIDOActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtAPELLIDOActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtINGRESOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtINGRESOActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtINGRESOActionPerformed
 
-    private void NOMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NOMKeyTyped
-        Boolean limite = LIMITAR_LARGO.LimitarLargo(evt, NOM.getText(), 5);
-        Boolean validar = SOLO_LETRAS.SoloLetras(evt, NOM.getText());
+    private void txtNOMBREKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNOMBREKeyTyped
 
-        if (validar == true) {
-            if (limite == true) {
-            } else {
-                evt.consume();
-            }
+        if (SOLO_LETRAS.SoloLetras(evt, txtNOMBRE.getText(), 5) == true) {
         } else {
             evt.consume();
+            getToolkit().beep();
         }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_NOMKeyTyped
+    }//GEN-LAST:event_txtNOMBREKeyTyped
+
+    private void btnVOLVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVOLVERActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVOLVERActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,16 +211,16 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField NOM;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    public javax.swing.JButton btnINSERTAR;
+    public javax.swing.JButton btnVOLVER;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    public javax.swing.JTextField txtAPELLIDO;
+    public javax.swing.JTextField txtINGRESO;
+    public javax.swing.JTextField txtNOMBRE;
+    public javax.swing.JTextField txtRUT;
     // End of variables declaration//GEN-END:variables
 }
