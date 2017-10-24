@@ -151,7 +151,11 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
     }//GEN-LAST:event_txtINGRESOActionPerformed
 
     private void txtNOMBREKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNOMBREKeyTyped
+            if (SOLO_LETRAS.SoloLetras(evt, txtNOMBRE.getText(), 5) == true) {
+            } else {
+                evt.consume();
 
+            }
 
 
         // TODO add your handling code here:

@@ -6,6 +6,7 @@
 package Controlador;
 
 import Metodo.SOLO_LETRAS;
+import Metodo.VAL_RUT;
 import Modelo.OAD_CHOFER;
 import Vista.CRUD_CHOFER;
 import java.awt.event.ActionEvent;
@@ -13,13 +14,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Koe
  */
-public class CONT_CHOFER implements ActionListener {
+public class CONT_CHOFER implements ActionListener, KeyListener {
 
     CRUD_CHOFER VISTA = new CRUD_CHOFER();
     OAD_CHOFER MODELO = new OAD_CHOFER();
@@ -29,7 +29,10 @@ public class CONT_CHOFER implements ActionListener {
         this.VISTA = VISTA;
         this.VISTA.btnINSERTAR.addActionListener(this);
         this.VISTA.btnVOLVER.addActionListener(this);
-        //this.VISTA.txtRUT.addKeyListener(this);
+        this.VISTA.txtRUT.addKeyListener(this);
+        this.VISTA.txtNOMBRE.addKeyListener(this);
+        this.VISTA.txtAPELLIDO.addKeyListener(this);
+
     }
 
     @Override
@@ -47,10 +50,15 @@ public class CONT_CHOFER implements ActionListener {
 
     }
 
+    @Override
     public void keyTyped(KeyEvent e) {
 
         if (e.getSource() == VISTA.txtRUT) {
+            if (VAL_RUT.SOLO_RUT(e, VISTA.txtRUT.getText()) == true) {
 
+            } else {
+                e.consume();
+            }
         }
 
         if (e.getSource() == VISTA.txtNOMBRE) {
@@ -62,9 +70,23 @@ public class CONT_CHOFER implements ActionListener {
         }
 
         if (e.getSource() == VISTA.txtAPELLIDO) {
+            if (SOLO_LETRAS.SoloLetras(e, VISTA.txtAPELLIDO.getText(), 5) == true) {
+            } else {
+                e.consume();
 
+            }
         }
 
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

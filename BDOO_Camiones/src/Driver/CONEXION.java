@@ -28,7 +28,7 @@ public class CONEXION {
         Statement statement = connection.createStatement();
         return statement;
         }catch(Exception e){
-        System.out.println("The exception raised is:" + e);
+        System.out.println("Hay un problema en:" + e);
         return null;  
         }
         
