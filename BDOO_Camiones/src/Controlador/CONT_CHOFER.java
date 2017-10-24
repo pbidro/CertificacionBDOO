@@ -59,12 +59,9 @@ public class CONT_CHOFER implements ActionListener, KeyListener {
         if (error.equals("")) {
             if (e.getSource() == VISTA.btnINSERTAR) {
                 if (VAL_RUT.validarRut(VISTA.txtRUT.getText()) == true) {
-                    
-                    
-                    JOptionPane.showMessageDialog(null, "EL RUT ES VALIDO");
-                } 
-                
-                else {
+                    Modelo.OAD_CHOFER.PROCEDIMIENTO(1, VISTA.txtRUT.getText(), VISTA.txtNOMBRE.getText(), VISTA.txtAPELLIDO.getText(), null);
+                    JOptionPane.showMessageDialog(null, "REGISTRO INSERTADO");
+                } else {
                 }
             }
         } else {

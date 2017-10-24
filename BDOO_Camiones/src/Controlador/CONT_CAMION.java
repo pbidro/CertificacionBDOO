@@ -10,5 +10,5 @@ package Controlador;
  * @author Koe
  */
 public class CONT_CAMION {
-    
+
 }

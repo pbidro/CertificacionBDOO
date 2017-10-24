@@ -5,6 +5,13 @@
  */
 package Modelo;
 
+import Driver.CONEXION;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Koe
@@ -76,6 +83,21 @@ public class OAD_CHOFER {
 
     public static void setTOTALVIAJES(int TOTALVIAJES) {
         OAD_CHOFER.TOTALVIAJES = TOTALVIAJES;
+    }
+
+    public static void PROCEDIMIENTO(int OPT, String RUT, String NOMBRE, String APELLIDO, String FECHA) {
+        try {
+            CallableStatement PROCEDURE = CONEXION.conn().prepareCall("{call CRUD_CHOFER (?,?,?,?,?)}");
+            PROCEDURE.setInt(1, OPT);
+            PROCEDURE.setString(2, RUT);
+            PROCEDURE.setString(3, NOMBRE);
+            PROCEDURE.setString(4, APELLIDO);
+            PROCEDURE.setString(5, FECHA);
+            PROCEDURE.execute();
+        } catch (SQLException ex) {
+            System.out.println("EL ERROR ES:" + ex);
+        }
+
     }
 
 }
