@@ -45,27 +45,22 @@ public class VAL_RUT {
         if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)
                 && (c != 'K') && (c != 'k')) {
             Validar = false;
-
         }
-        if (c == 'K' || c == 'k' && rut.length() < 7) {
+        if ((c == 'K' || c == 'k') && rut.length() <= 7) {
             Validar = false;
         }
         if ((c == 'K' || c == 'k') && (rut.contains("K") || rut.contains("k"))) {
             Validar = false;
         }
-
         if ((c == 'K' || c == 'k') && rut.trim().equals("")) {
             Validar = false;
         }
-
         if (rut.length() >= 9) {
             Validar = false;
         }
-
         if (rut.length() >= 7 && (rut.contains("K") || rut.contains("k"))) {
             Validar = false;
         }
-
         return Validar;
     }
 

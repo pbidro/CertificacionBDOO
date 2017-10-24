@@ -208,7 +208,7 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel5;
     public javax.swing.JTextField txtAPELLIDO;
     public javax.swing.JTextField txtINGRESO;
     public javax.swing.JTextField txtNOMBRE;

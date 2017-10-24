@@ -32,15 +32,43 @@ public class CONT_CHOFER implements ActionListener, KeyListener {
         this.VISTA.txtRUT.addKeyListener(this);
         this.VISTA.txtNOMBRE.addKeyListener(this);
         this.VISTA.txtAPELLIDO.addKeyListener(this);
+        initComponents();
+    }
+
+    private void initComponents() {
+        this.VISTA.jLabel5.setText("77");
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String error = "";
+        if (VISTA.txtRUT.getText().trim().equals("")) {
+            error += "\n Debe ingresar un RUT";
 
-        if (e.getSource() == VISTA.btnINSERTAR) {
-            VISTA.txtRUT.setText("");
-            JOptionPane.showMessageDialog(null, "LIMPIADO");
+        } else if (VAL_RUT.validarRut(VISTA.txtRUT.getText()) == false) {
+            error += "\n Debe ingresar un RUT válido";
+        }
+        if (VISTA.txtNOMBRE.getText().trim().equals("")) {
+            error += "\n Debe ingresar un nombre";
+        }
+        if (VISTA.txtAPELLIDO.getText().trim().equals("")) {
+            error += "\n Debe ingresar un Apellido";
+        }
+
+        if (error.equals("")) {
+            if (e.getSource() == VISTA.btnINSERTAR) {
+                if (VAL_RUT.validarRut(VISTA.txtRUT.getText()) == true) {
+                    
+                    
+                    JOptionPane.showMessageDialog(null, "EL RUT ES VALIDO");
+                } 
+                
+                else {
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, error);
 
         }
 
