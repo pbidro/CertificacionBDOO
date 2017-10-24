@@ -18,9 +18,6 @@ import java.util.LinkedList;
  */
 public class CONEXION {
 
-    public CONEXION() {
-    }
-
     public static Connection conn() {
         Connection cn = null;
 
