@@ -36,41 +36,24 @@ public class CONT_CHOFER implements ActionListener, KeyListener {
     }
 
     private void initComponents() {
-        this.VISTA.jLabel5.setText("77");
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String error = "";
-        if (VISTA.txtRUT.getText().trim().equals("")) {
-            error += "\n Debe ingresar un RUT";
 
-        } else if (VAL_RUT.validarRut(VISTA.txtRUT.getText()) == false) {
-            error += "\n Debe ingresar un RUT válido";
-        }
-        if (VISTA.txtNOMBRE.getText().trim().equals("")) {
-            error += "\n Debe ingresar un nombre";
-        }
-        if (VISTA.txtAPELLIDO.getText().trim().equals("")) {
-            error += "\n Debe ingresar un Apellido";
-        }
+        String error = validar_campos_vacios();
+        if (e.getSource() == VISTA.btnINSERTAR) {
 
-        if (error.equals("")) {
-            if (e.getSource() == VISTA.btnINSERTAR) {
-                if (VAL_RUT.validarRut(VISTA.txtRUT.getText()) == true) {
-                    Modelo.OAD_CHOFER.PROCEDIMIENTO(1, VISTA.txtRUT.getText(), VISTA.txtNOMBRE.getText(), VISTA.txtAPELLIDO.getText(), null);
-                    JOptionPane.showMessageDialog(null, "REGISTRO INSERTADO");
-                } else {
-                }
+            if (error.equals("")) {
+                insertar_registro();
+            } else {
+                JOptionPane.showMessageDialog(null, error);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, error);
-
         }
 
         if (e.getSource() == VISTA.btnVOLVER) {
-            JOptionPane.showMessageDialog(null, "BOTON VOLVER");
+            VISTA.dispose();
         }
 
     }
@@ -112,6 +95,47 @@ public class CONT_CHOFER implements ActionListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    protected String validar_campos_vacios() {
+
+        String error = "";
+        if (VISTA.txtRUT.getText().trim().equals("")) {
+            error += "\n Debe ingresar un RUT";
+
+        } else if (VAL_RUT.validarRut(VISTA.txtRUT.getText()) == false) {
+            error += "\n Debe ingresar un RUT válido";
+        }
+        if (VISTA.txtNOMBRE.getText().trim().equals("")) {
+            error += "\n Debe ingresar un nombre";
+        }
+        if (VISTA.txtAPELLIDO.getText().trim().equals("")) {
+            error += "\n Debe ingresar un Apellido";
+        }
+
+        return error;
+
+    }
+
+    protected void insertar_registro() {
+        try {
+
+            if (VAL_RUT.validarRut(VISTA.txtRUT.getText()) == true) {
+                if (Modelo.OAD_CHOFER.PROCEDIMIENTO(1, VISTA.txtRUT.getText(), VISTA.txtNOMBRE.getText(), VISTA.txtAPELLIDO.getText(), null) == true) {
+                    JOptionPane.showMessageDialog(null, "REGISTRO INSERTADO");
+                }
+                else{
+                                        JOptionPane.showMessageDialog(null, "EL CHOFER YA ESTÁ REGISTRADO");
+
+                }
+
+            } else {
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al insertar el registro");
+        }
+
     }
 
 }
