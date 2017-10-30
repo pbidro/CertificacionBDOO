@@ -18,7 +18,7 @@ import java.util.LinkedList;
  */
 public class CONEXION {
 
-    public static Connection conn() {
+    public static Connection conectar() {
         Connection cn = null;
 
         try {
@@ -31,6 +31,34 @@ public class CONEXION {
 
         }
 
+    }
+
+    public boolean desconectar() {
+        try {
+            DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "PROYECTO", "12345").close();
+            return true;
+        } catch (Exception SQLException) {
+            return false;
+        }
+    }
+
+    
+    public String Consultar(String consulta) {
+        try {
+
+            ResultSet rs = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "PROYECTO", "12345").createStatement().executeQuery(consulta);
+            String devolver = "";
+            while (rs.next()) {
+                for (int i = 1; i <= rs.getFetchSize(); i++) {
+                    devolver += rs.getString(i) + " ";
+                }
+                devolver += "\n";
+            }
+            return devolver;
+        } catch (Exception SQLException) {
+            System.out.println("Saltó la escepción\n" + SQLException);
+        }
+        return "error";
     }
 
 }
