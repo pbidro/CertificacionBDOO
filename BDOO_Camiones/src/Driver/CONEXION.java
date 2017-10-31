@@ -42,17 +42,15 @@ public class CONEXION {
         }
     }
 
-    
-    public String Consultar(String consulta) {
+
+    public static String Consultar(String consulta) {
         try {
 
             ResultSet rs = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "PROYECTO", "12345").createStatement().executeQuery(consulta);
             String devolver = "";
             while (rs.next()) {
-                for (int i = 1; i <= rs.getFetchSize(); i++) {
-                    devolver += rs.getString(i) + " ";
-                }
-                devolver += "\n";
+                devolver =rs.getString("NOMBRE");
+                System.out.println(devolver);
             }
             return devolver;
         } catch (Exception SQLException) {

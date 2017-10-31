@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Driver.CONEXION;
 import Metodo.SOLO_LETRAS;
 import Metodo.VAL_RUT;
 import Modelo.OAD_CHOFER;

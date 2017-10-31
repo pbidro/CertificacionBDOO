@@ -8,6 +8,7 @@ package Modelo;
 import Driver.CONEXION;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import javax.swing.JTable;
 
 /**
  *
@@ -38,6 +39,16 @@ public class OAD_CHOFER {
             return false;
         }
 
+    }
+
+    public static void CARGARDATOS(String FILTRO, JTable Tabla) {
+        String consultar = "SELECT A.FULLNAME(), A.CARGO(), A.TOTALVIAJES() FROM CHOFER A";
+        CONEXION.Consultar(consultar);
+    }
+
+    public static void FILTRARDATOS() {
+        String consultar = "SELECT A.FULLNAME(), A.CARGO(), A.TOTALVIAJES() FROM CHOFER A";
+        CONEXION.Consultar(consultar);
     }
 
 }
