@@ -33,30 +33,11 @@ public class CONEXION {
 
     }
 
-    public boolean desconectar() {
+    public static void desconectar() {
         try {
             DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "PROYECTO", "12345").close();
-            return true;
         } catch (Exception SQLException) {
-            return false;
         }
-    }
-
-
-    public static String Consultar(String consulta) {
-        try {
-
-            ResultSet rs = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "PROYECTO", "12345").createStatement().executeQuery(consulta);
-            String devolver = "";
-            while (rs.next()) {
-                devolver =rs.getString("NOMBRE");
-                System.out.println(devolver);
-            }
-            return devolver;
-        } catch (Exception SQLException) {
-            System.out.println("Saltó la escepción\n" + SQLException);
-        }
-        return "error";
     }
 
 }

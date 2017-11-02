@@ -33,11 +33,12 @@ public class CONT_CHOFER implements ActionListener, KeyListener {
         this.VISTA.txtRUT.addKeyListener(this);
         this.VISTA.txtNOMBRE.addKeyListener(this);
         this.VISTA.txtAPELLIDO.addKeyListener(this);
+        this.VISTA.txtBUSQUEDA.addKeyListener(this);
         initComponents();
     }
 
     private void initComponents() {
-
+        cargar_tabla();
     }
 
     @Override
@@ -91,11 +92,22 @@ public class CONT_CHOFER implements ActionListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     
+        if (e.getSource() == VISTA.txtBUSQUEDA) {
+            if (SOLO_LETRAS.SoloLetras(e, VISTA.txtBUSQUEDA.getText(), 5) == true) {
+                cargar_tabla();
+            } else {
+                e.consume();
+
+            }
+        }        
+//   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     protected String validar_campos_vacios() {
@@ -124,9 +136,8 @@ public class CONT_CHOFER implements ActionListener, KeyListener {
             if (VAL_RUT.validarRut(VISTA.txtRUT.getText()) == true) {
                 if (Modelo.OAD_CHOFER.PROCEDIMIENTO(1, VISTA.txtRUT.getText(), VISTA.txtNOMBRE.getText(), VISTA.txtAPELLIDO.getText(), null) == true) {
                     JOptionPane.showMessageDialog(null, "REGISTRO INSERTADO");
-                }
-                else{
-                                        JOptionPane.showMessageDialog(null, "EL CHOFER YA ESTÁ REGISTRADO");
+                } else {
+                    JOptionPane.showMessageDialog(null, "EL CHOFER YA ESTÁ REGISTRADO");
 
                 }
 
@@ -137,6 +148,10 @@ public class CONT_CHOFER implements ActionListener, KeyListener {
             JOptionPane.showMessageDialog(null, "Error al insertar el registro");
         }
 
+    }
+
+    public void cargar_tabla() {
+        VISTA.jtLISTA.setModel(OAD_CHOFER.CARGARDATOS(VISTA.txtBUSQUEDA.getText()));
     }
 
 }

@@ -7,8 +7,13 @@ package Modelo;
 
 import Driver.CONEXION;
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -41,14 +46,31 @@ public class OAD_CHOFER {
 
     }
 
-    public static void CARGARDATOS(String FILTRO, JTable Tabla) {
-        String consultar = "SELECT A.FULLNAME(), A.CARGO(), A.TOTALVIAJES() FROM CHOFER A";
-        CONEXION.Consultar(consultar);
-    }
+    public static DefaultTableModel CARGARDATOS(String FILTRO) {
+        String sql = "SELECT A.FULLNAME() AS NOMBRE, A.CATEGORIA() AS CARGO, A.TOTALVIAJES() AS VIAJES FROM CHOFER A WHERE A.FULLNAME() LIKE LOWER('%" + FILTRO + "%') OR A.FULLNAME() LIKE UPPER('%" + FILTRO + "%')";
+        String[] titulos = {"Nombre", "Cargo", "Viajes"};
+        DefaultTableModel model = new DefaultTableModel(null, titulos);
+        String[] fila = new String[3];
+        try {
+            Statement st = CONEXION.conectar().createStatement();
+            ResultSet rs = st.executeQuery(sql);
 
-    public static void FILTRARDATOS() {
-        String consultar = "SELECT A.FULLNAME(), A.CARGO(), A.TOTALVIAJES() FROM CHOFER A";
-        CONEXION.Consultar(consultar);
+            while (rs.next()) {
+
+                fila[0] = rs.getString("NOMBRE");
+                fila[1] = rs.getString("CARGO");
+                fila[2] = rs.getString("VIAJES");
+                model.addRow(fila);
+            }
+            CONEXION.desconectar();
+            return model;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(OAD_CHOFER.class.getName()).log(Level.SEVERE, null, ex);
+            CONEXION.desconectar();
+            return model;
+
+        }
     }
 
 }
