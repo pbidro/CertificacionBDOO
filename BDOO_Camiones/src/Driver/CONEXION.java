@@ -9,8 +9,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,6 +40,17 @@ public class CONEXION {
         try {
             DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "PROYECTO", "12345").close();
         } catch (Exception SQLException) {
+        }
+    }
+
+    public static void commit() {
+        String sql = "commit";
+        try {
+            CONEXION.conectar().createStatement().executeQuery(sql);
+            System.out.println("se ha hecho commit");
+        } catch (SQLException ex) {
+            Logger.getLogger(CONEXION.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("no se hizo commit");
         }
     }
 

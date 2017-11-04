@@ -5,13 +5,52 @@
  */
 package Metodo;
 
-import java.awt.event.KeyEvent;
+import com.sun.glass.events.KeyEvent;
 
 /**
  *
  * @author Koe
  */
-public class VAL_RUT {
+public class METODOS_TEXTFIELD {
+
+    public static Boolean LimitarLargo(java.awt.event.KeyEvent evt, String texto, int largo) {
+        Boolean Limite = true;
+        if (texto.length() >= largo) {
+            Limite = false;
+        }
+        return Limite;
+    }
+
+    public static Boolean SoloLetras(java.awt.event.KeyEvent evt, String texto, int largo) {
+        Boolean Validar = true;
+        char tecla;
+        tecla = evt.getKeyChar();
+
+        if (!Character.isLetter(tecla) && tecla != KeyEvent.VK_SPACE && tecla != KeyEvent.VK_BACKSPACE) {
+            Validar = false;
+
+        }
+        if (LimitarLargo(evt, texto, largo) == false) {
+            Validar = false;
+
+        }
+        return Validar;
+    }
+
+    public static Boolean SoloNumeros(java.awt.event.KeyEvent evt, String texto, int largo) {
+        Boolean Validar = true;
+        char teclaE;
+        teclaE = evt.getKeyChar();
+
+        if (!Character.isDigit(teclaE) && teclaE != KeyEvent.VK_BACKSPACE) {
+            Validar = false;
+        }
+
+        if (LimitarLargo(evt, texto, largo) == false) {
+            Validar = false;
+        }
+        return Validar;
+    }
 
     public static boolean validarRut(String rut) {
 
@@ -42,7 +81,7 @@ public class VAL_RUT {
 
         Boolean Validar = true;
         char c = evt.getKeyChar();
-        if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)
+        if (((c < '0') || (c > '9')) && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)
                 && (c != 'K') && (c != 'k')) {
             Validar = false;
         }

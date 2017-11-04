@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package Vista;
-
-import Metodo.SOLO_LETRAS;
-
 /**
  *
  * @author Koe
@@ -227,14 +224,7 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
     }//GEN-LAST:event_txtINGRESOActionPerformed
 
     private void txtNOMBREKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNOMBREKeyTyped
-            if (SOLO_LETRAS.SoloLetras(evt, txtNOMBRE.getText(), 5) == true) {
-            } else {
-                evt.consume();
-
-            }
-
-
-        // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_txtNOMBREKeyTyped
 
     private void btnVOLVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVOLVERActionPerformed

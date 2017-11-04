@@ -38,9 +38,11 @@ public class OAD_CHOFER {
             PROCEDURE.setString(4, APELLIDO);
             PROCEDURE.setString(5, FECHA);
             PROCEDURE.execute();
+            CONEXION.desconectar();
             return true;
         } catch (SQLException ex) {
             System.out.println("EL ERROR ES:" + ex);
+            CONEXION.desconectar();
             return false;
         }
 
