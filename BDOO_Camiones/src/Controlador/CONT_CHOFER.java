@@ -153,7 +153,7 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
         try {
 
             if (METODOS_TEXTFIELD.validarRut(VISTA.txtRUT.getText()) == true) {
-                if (Modelo.OAD_CHOFER.VERIFICAR_CHOFER(VISTA.txtRUT.getText()) == false) {
+                if (Modelo.OAD_CHOFER.VERIFICAR_CHOFER(VISTA.txtRUT.getText()) == true) {
 
                     if (Modelo.OAD_CHOFER.PROCEDIMIENTO(1, VISTA.txtRUT.getText(), VISTA.txtNOMBRE.getText(), VISTA.txtAPELLIDO.getText(), VISTA.txtINGRESO.getText()) == true) {
                         JOptionPane.showMessageDialog(null, "REGISTRO INSERTADO");
@@ -162,18 +162,18 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
                         limpiacampos();
                     } else {
                         {
-                            editar_registro();
-                            JOptionPane.showMessageDialog(null, "REGISTRO RESTAURADO E INSERTADO");
-                            CONEXION.commit();
-                            cargar_tabla();
-                            limpiacampos();
+                            JOptionPane.showMessageDialog(null, "EL CHOFER INGRESADO YA SE ENCUENTRA EN NUESTRA BASE DE DATOS");
                         }
 
                     }
 
                 } else {
-
-                    JOptionPane.showMessageDialog(null, "EL CHOFER INGRESADO YA SE ENCUENTRA EN NUESTRA BASE DE DATOS");
+                    editar_registro();
+                    JOptionPane.showMessageDialog(null, "REGISTRO RESTAURADO E INSERTADO");
+                    CONEXION.commit();
+                    cargar_tabla();
+                    limpiacampos();
+                    
 
                 }
 

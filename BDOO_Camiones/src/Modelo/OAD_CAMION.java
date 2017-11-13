@@ -29,7 +29,7 @@ public class OAD_CAMION {
 
     public static boolean PROCEDIMIENTO(int OPT, String PAT, int ANO, String DESC, String MARCA, int EJES) {
         try {
-            CallableStatement PROCEDURE = CONEXION.conectar().prepareCall("{call CRUD_CHOFER (?,?,?,?,?,?)}");
+            CallableStatement PROCEDURE = CONEXION.conectar().prepareCall("{call CRUD_CAMION(?,?,?,?,?,?)}");
             PROCEDURE.setInt(1, OPT);
             PROCEDURE.setString(2, PAT);
             PROCEDURE.setInt(3, ANO);
@@ -77,15 +77,17 @@ public class OAD_CAMION {
         }
     }
 
-    public static boolean VERIFICAR_CHOFER(String FILTRO) {
+    public static boolean VERIFICAR_CAMION(String FILTRO) {
         String sql = "SELECT A.PATENTE FROM CAMION A WHERE A.ESTADO = 0 AND A.PATENTE='" + FILTRO + "'";
         boolean verificar = true;
         try {
             Statement st = CONEXION.conectar().createStatement();
             ResultSet rs = st.executeQuery(sql);
+                System.out.println(verificar);
 
             while (rs.next()) {
                 verificar = false;
+                System.out.println(verificar);
             }
             CONEXION.desconectar();
 
