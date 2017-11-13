@@ -102,5 +102,15 @@ public class METODOS_TEXTFIELD {
         }
         return Validar;
     }
+    
+        public static Boolean BLOQUEAR_ESCRITURA(java.awt.event.KeyEvent evt) {
+
+        Boolean Validar = true;
+        
+        if (LimitarLargo(evt, null, 0) == false) {
+            Validar = false;
+        }
+        return Validar;
+    }
 
 }

@@ -49,19 +49,22 @@ public class OAD_CHOFER {
     }
 
     public static DefaultTableModel CARGARDATOS(String FILTRO) {
-        String sql = "SELECT A.FULLNAME() AS NOMBRE, A.CATEGORIA() AS CARGO, A.TOTALVIAJES() AS VIAJES FROM CHOFER A WHERE A.FULLNAME() LIKE LOWER('%" + FILTRO + "%') OR A.FULLNAME() LIKE UPPER('%" + FILTRO + "%')";
-        String[] titulos = {"Nombre", "Cargo", "Viajes"};
+        String sql = "SELECT A.RUT, A.NOMBRE, A.APELLIDO, A.FECHA_INGRESO, A.CATEGORIA() AS CARGO, A.TOTALVIAJES() AS VIAJES FROM CHOFER A WHERE A.ESTADO = 1";
+        String[] titulos = {"RUT", "Nombre", "Apellido", "Ingreso", "Cargo", "Viajes"};
         DefaultTableModel model = new DefaultTableModel(null, titulos);
-        String[] fila = new String[3];
+        String[] fila = new String[6];
         try {
             Statement st = CONEXION.conectar().createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
 
-                fila[0] = rs.getString("NOMBRE");
-                fila[1] = rs.getString("CARGO");
-                fila[2] = rs.getString("VIAJES");
+                fila[0] = rs.getString("RUT");
+                fila[1] = rs.getString("NOMBRE");
+                fila[2] = rs.getString("APELLIDO");
+                fila[3] = rs.getString("FECHA_INGRESO");
+                fila[4] = rs.getString("CARGO");
+                fila[5] = rs.getString("VIAJES");
                 model.addRow(fila);
             }
             CONEXION.desconectar();
@@ -73,6 +76,25 @@ public class OAD_CHOFER {
             return model;
 
         }
+    }
+
+    public static boolean VERIFICAR_CHOFER(String FILTRO) {
+        String sql = "SELECT A.RUT FROM CHOFER A WHERE A.ESTADO = 0 AND A.RUT='" + FILTRO + "'";
+        boolean verificar = true;
+        try {
+            Statement st = CONEXION.conectar().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                verificar = false;
+            }
+            CONEXION.desconectar();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(OAD_CHOFER.class.getName()).log(Level.SEVERE, null, ex);
+            CONEXION.desconectar();
+        }
+        return verificar;
     }
 
 }

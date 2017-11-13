@@ -34,10 +34,10 @@ public class METODOS_TABLAS {
 
     }
 
-    public static void filtrar_tabla(JTable tbl, String flt) {
+    public static void filtrar_tabla(JTable tbl, String flt,int parametro) {
         TableRowSorter trsFiltro = new TableRowSorter(tbl.getModel());
         tbl.setRowSorter(trsFiltro);
-        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + flt, 0));
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + flt, parametro));
     }
 
 }
