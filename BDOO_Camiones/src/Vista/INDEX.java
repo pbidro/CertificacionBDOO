@@ -7,8 +7,10 @@ package Vista;
 
 import Controlador.CONT_CAMION;
 import Controlador.CONT_CHOFER;
+import Controlador.CONT_VIAJE;
 import Modelo.OAD_CAMION;
 import Modelo.OAD_CHOFER;
+import Modelo.OAD_VIAJE;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -69,6 +71,11 @@ public class INDEX extends javax.swing.JFrame {
         });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imágenes/VIAJEx32.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(99, 94, 94));
@@ -206,6 +213,15 @@ public class INDEX extends javax.swing.JFrame {
     private void btnVOLVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVOLVERActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVOLVERActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        CRUD_VIAJE VISTA = new CRUD_VIAJE();
+        OAD_VIAJE MODELO = new OAD_VIAJE();
+        CONT_VIAJE CONTROLADOR = new CONT_VIAJE(VISTA, MODELO);
+
+        VISTA.setVisible(true);
+        VISTA.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
