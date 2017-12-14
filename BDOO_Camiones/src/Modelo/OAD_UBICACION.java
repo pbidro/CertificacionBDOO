@@ -6,6 +6,7 @@
 package Modelo;
 
 import Driver.CONEXION;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -46,5 +47,21 @@ public class OAD_UBICACION {
         }
     }
 
+        public static boolean PROCEDIMIENTO(int OPT, int CODIGO, String DESCRIPCION) {
+        try {
+            CallableStatement PROCEDURE = CONEXION.conectar().prepareCall("{call CRUD_UBICACION(?,?,?)}");
+            PROCEDURE.setInt(1, OPT);
+            PROCEDURE.setInt(2, CODIGO);
+            PROCEDURE.setString(3, DESCRIPCION);
+            PROCEDURE.execute();
+            CONEXION.desconectar();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("EL ERROR ES:" + ex);
+            CONEXION.desconectar();
+            return false;
+        }
+
+    }
     
 }

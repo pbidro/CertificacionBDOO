@@ -7,9 +7,11 @@ package Vista;
 
 import Controlador.CONT_CAMION;
 import Controlador.CONT_CHOFER;
+import Controlador.CONT_UBICACION;
 import Controlador.CONT_VIAJE;
 import Modelo.OAD_CAMION;
 import Modelo.OAD_CHOFER;
+import Modelo.OAD_UBICACION;
 import Modelo.OAD_VIAJE;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -87,6 +89,11 @@ public class INDEX extends javax.swing.JFrame {
         jLabel5.setText("SELECCIONE UNA ACCIÓN");
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imágenes/ESTADISTICASx32.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(163, 145, 145));
@@ -98,7 +105,7 @@ public class INDEX extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(163, 145, 145));
-        jLabel13.setText("MENÚ ESTADÍSTICAS");
+        jLabel13.setText("MENÚ UBICACIÓNES");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(163, 145, 145));
@@ -196,6 +203,7 @@ public class INDEX extends javax.swing.JFrame {
 
         VISTA.setVisible(true);
         VISTA.setLocationRelativeTo(null);
+        this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -207,6 +215,7 @@ public class INDEX extends javax.swing.JFrame {
 
         VISTA.setVisible(true);
         VISTA.setLocationRelativeTo(null);
+        this.dispose();
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -221,7 +230,18 @@ public class INDEX extends javax.swing.JFrame {
 
         VISTA.setVisible(true);
         VISTA.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        CRUD_UBICACION VISTA = new CRUD_UBICACION();
+        OAD_UBICACION MODELO = new OAD_UBICACION();
+        CONT_UBICACION CONTROLADOR = new CONT_UBICACION(VISTA, MODELO);
+
+        VISTA.setVisible(true);
+        VISTA.setLocationRelativeTo(null);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

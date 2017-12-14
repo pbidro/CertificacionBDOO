@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Controlador.CONT_CHOFER;
+
 /**
  *
  * @author Koe
@@ -15,6 +17,7 @@ public class CRUD_CAMION extends javax.swing.JFrame {
      * Creates new form Camion
      */
     public CRUD_CAMION() {
+        getContentPane().setBackground(new java.awt.Color(30, 232, 107));
         initComponents();
     }
 
@@ -53,7 +56,6 @@ public class CRUD_CAMION extends javax.swing.JFrame {
         jtLISTA = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         txtBUSQUEDA = new javax.swing.JTextField();
-        jcbPARAMETRO1 = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,11 +70,18 @@ public class CRUD_CAMION extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(536, 607));
 
         btnVOLVER.setText("VOLVER");
+        btnVOLVER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVOLVERActionPerformed(evt);
+            }
+        });
 
+        jPanel1.setBackground(new java.awt.Color(0, 255, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel5.setText("EJES :");
@@ -167,6 +176,11 @@ public class CRUD_CAMION extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imágenes/CAMIONx64.png"))); // NOI18N
         jLabel7.setText("MENÚ CAMIÓN");
 
+        jtLISTA = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         jtLISTA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -178,13 +192,19 @@ public class CRUD_CAMION extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtLISTA.setFocusable(false);
+        jtLISTA.getTableHeader().setResizingAllowed(false);
+        jtLISTA.getTableHeader().setReorderingAllowed(false);
+        jtLISTA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtLISTAMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jtLISTA);
 
         jLabel8.setText("BUSCAR CAMION:");
 
         txtBUSQUEDA.setForeground(new java.awt.Color(102, 102, 102));
-
-        jcbPARAMETRO1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RUT", "NOMBRE", "APELLIDO" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,7 +224,7 @@ public class CRUD_CAMION extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(btnVOLVER, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(127, 127, 127)
+                                .addGap(136, 136, 136)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,11 +245,6 @@ public class CRUD_CAMION extends javax.swing.JFrame {
                                         .addComponent(txtBUSQUEDA, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 35, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jcbPARAMETRO1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,16 +269,23 @@ public class CRUD_CAMION extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVOLVER)
                 .addGap(6, 6, 6))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jcbPARAMETRO1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtLISTAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLISTAMouseClicked
+
+        setear();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtLISTAMouseClicked
+
+    private void btnVOLVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVOLVERActionPerformed
+        INDEX VISTA = new INDEX();
+        VISTA.setVisible(true);
+        VISTA.setLocationRelativeTo(null);
+        this.dispose();          // TODO add your handling code here:
+    }//GEN-LAST:event_btnVOLVERActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -286,7 +308,6 @@ public class CRUD_CAMION extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    public javax.swing.JComboBox<String> jcbPARAMETRO1;
     public javax.swing.JTable jtLISTA;
     public com.toedter.calendar.JYearChooser txtAÑO;
     public javax.swing.JTextField txtBUSQUEDA;
@@ -295,4 +316,25 @@ public class CRUD_CAMION extends javax.swing.JFrame {
     public javax.swing.JTextField txtMARCA;
     public javax.swing.JTextField txtPATENTE;
     // End of variables declaration//GEN-END:variables
+
+    public void setear() {
+        int fsel = jtLISTA.getSelectedRow();
+
+        if (fsel == -1) {
+
+        } else {
+
+            if (RB_AGREGAR.isSelected()) {
+            } else {
+
+                txtPATENTE.setText(jtLISTA.getValueAt(fsel, 0).toString());
+                txtAÑO.setYear(Integer.parseInt(jtLISTA.getValueAt(fsel, 1).toString()));
+                txtEJES.setValue(Integer.valueOf(jtLISTA.getValueAt(fsel, 4).toString()));
+                txtMARCA.setText(jtLISTA.getValueAt(fsel, 3).toString());
+                txtDESCRIPCION.setText(jtLISTA.getValueAt(fsel, 2).toString());
+            }
+        }
+
+    }
+
 }

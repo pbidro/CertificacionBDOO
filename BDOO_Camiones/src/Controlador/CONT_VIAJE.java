@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Driver.CONEXION;
 import Metodo.METODOS_TABLAS;
 import Modelo.OAD_CAMION;
 import Modelo.OAD_CHOFER;
@@ -17,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,8 +38,6 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
         this.VISTA.btnpCHOFER.addActionListener(this);
         this.VISTA.btnpDESTINO.addActionListener(this);
         this.VISTA.btnpORIGEN.addActionListener(this);
-        this.VISTA.btndCAMION.addActionListener(this);
-        this.VISTA.btndCHOFER.addActionListener(this);
         this.VISTA.txtbCAMION.addKeyListener(this);
         this.VISTA.txtbCHOFER.addKeyListener(this);
         this.VISTA.txtbORIGEN.addKeyListener(this);
@@ -52,6 +52,19 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
+
+            if (e.getSource() == VISTA.btnCRUD) {
+                if (VISTA.btnCRUD.getText().equals("AGREGAR")) {
+                    insertar_registro();
+                }
+                if (VISTA.btnCRUD.getText().equals("EDITAR")) {
+                    editar_registro();
+                }
+                if (VISTA.btnCRUD.getText().equals("ELIMINAR")) {
+                    eliminar_registro();
+                }
+            }
+
             if (e.getSource() == VISTA.btnpCHOFER) {
                 if (VISTA.btnpCHOFER.getText().equals("ESCOGER")) {
                     int fsel = VISTA.jtCHOFER.getSelectedRow();
@@ -59,11 +72,13 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
                     } else {
                         VISTA.txtbCHOFER.setText(VISTA.jtCHOFER.getValueAt(fsel, 0).toString());
                         VISTA.txtbCHOFER.setEnabled(false);
+                        VISTA.jtCHOFER.setEnabled(false);
                         VISTA.btnpCHOFER.setText("LIBERAR");
                     }
                 } else {
                     VISTA.txtbCHOFER.setEnabled(true);
                     VISTA.btnpCHOFER.setText("ESCOGER");
+                    VISTA.jtCHOFER.setEnabled(true);
                 }
 
             }
@@ -77,11 +92,13 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
                     } else {
                         VISTA.txtbCAMION.setText(VISTA.jtCAMION.getValueAt(fsel, 0).toString());
                         VISTA.txtbCAMION.setEnabled(false);
+                        VISTA.jtCAMION.setEnabled(false);
                         VISTA.btnpCAMION.setText("LIBERAR");
                     }
                 } else {
                     VISTA.txtbCAMION.setEnabled(true);
                     VISTA.btnpCAMION.setText("ESCOGER");
+                    VISTA.jtCAMION.setEnabled(true);
                 }
             }
 
@@ -92,11 +109,13 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
                     } else {
                         VISTA.txtbORIGEN.setText(VISTA.jtORIGEN.getValueAt(fsel, 0).toString());
                         VISTA.txtbORIGEN.setEnabled(false);
+                        VISTA.jtORIGEN.setEnabled(false);
                         VISTA.btnpORIGEN.setText("LIBERAR");
                     }
                 } else {
                     VISTA.txtbORIGEN.setEnabled(true);
                     VISTA.btnpORIGEN.setText("ESCOGER");
+                    VISTA.jtORIGEN.setEnabled(true);
                 }
             }
 
@@ -109,11 +128,13 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
                     } else {
                         VISTA.txtbDESTINO.setText(VISTA.jtDESTINO.getValueAt(fsel, 0).toString());
                         VISTA.txtbDESTINO.setEnabled(false);
+                        VISTA.jtDESTINO.setEnabled(false);
                         VISTA.btnpDESTINO.setText("LIBERAR");
                     }
                 } else {
                     VISTA.txtbDESTINO.setEnabled(true);
                     VISTA.btnpDESTINO.setText("ESCOGER");
+                    VISTA.jtDESTINO.setEnabled(true);
                 }
             }
 
@@ -177,8 +198,6 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
             VISTA.btnpCHOFER.setEnabled(true);
             VISTA.btnpDESTINO.setEnabled(true);
             VISTA.btnpORIGEN.setEnabled(true);
-            VISTA.btndCAMION.setEnabled(true);
-            VISTA.btndCHOFER.setEnabled(true);
             VISTA.txtbCAMION.setEnabled(true);
             VISTA.txtbCHOFER.setEnabled(true);
             VISTA.txtbORIGEN.setEnabled(true);
@@ -186,6 +205,7 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
             VISTA.txtCARGA.setEnabled(true);
             VISTA.dtINICIO.setEnabled(true);
             VISTA.dtLLEGADA.setEnabled(true);
+            setear();
         } else {
             if (VISTA.RB_AGREGAR.isSelected()) {
                 VISTA.btnCRUD.setText("AGREGAR");
@@ -193,15 +213,19 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
                 VISTA.btnpCHOFER.setEnabled(true);
                 VISTA.btnpDESTINO.setEnabled(true);
                 VISTA.btnpORIGEN.setEnabled(true);
-                VISTA.btndCAMION.setEnabled(true);
-                VISTA.btndCHOFER.setEnabled(true);
                 VISTA.txtbCAMION.setEnabled(true);
+                VISTA.txtbCAMION.setText("");
                 VISTA.txtbCHOFER.setEnabled(true);
+                VISTA.txtbCHOFER.setText("");
                 VISTA.txtbORIGEN.setEnabled(true);
+                VISTA.txtbORIGEN.setText("");
                 VISTA.txtbDESTINO.setEnabled(true);
+                VISTA.txtbDESTINO.setText("");
                 VISTA.txtCARGA.setEnabled(true);
+                VISTA.txtCARGA.setText("");
                 VISTA.dtINICIO.setEnabled(true);
                 VISTA.dtLLEGADA.setEnabled(true);
+                VISTA.jlCODIGO.setText("0");
 
             } else {
                 VISTA.btnCRUD.setText("ELIMINAR");
@@ -209,8 +233,6 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
                 VISTA.btnpCHOFER.setEnabled(false);
                 VISTA.btnpDESTINO.setEnabled(false);
                 VISTA.btnpORIGEN.setEnabled(false);
-                VISTA.btndCAMION.setEnabled(false);
-                VISTA.btndCHOFER.setEnabled(false);
                 VISTA.txtbCAMION.setEnabled(false);
                 VISTA.txtbCHOFER.setEnabled(false);
                 VISTA.txtbORIGEN.setEnabled(false);
@@ -218,6 +240,105 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
                 VISTA.txtCARGA.setEnabled(false);
                 VISTA.dtINICIO.setEnabled(false);
                 VISTA.dtLLEGADA.setEnabled(false);
+                setear();
+            }
+        }
+
+    }
+
+    protected void insertar_registro() {
+        try {
+
+            if (VISTA.txtbCHOFER.isEnabled() || VISTA.txtbCAMION.isEnabled() || VISTA.txtbDESTINO.isEnabled() || VISTA.txtbORIGEN.isEnabled()) {
+
+            } else {
+
+                if (Modelo.OAD_VIAJE.PROCEDIMIENTO(1, Integer.parseInt(VISTA.jlCODIGO.getText()), VISTA.dtINICIO.getText(), VISTA.dtLLEGADA.getText(), VISTA.txtCARGA.getText(), Integer.parseInt(VISTA.txtbORIGEN.getText()), Integer.parseInt(VISTA.txtbDESTINO.getText()), VISTA.txtbCHOFER.getText(), VISTA.txtbCAMION.getText()) == true) {
+                    JOptionPane.showMessageDialog(null, "REGISTRO INSERTADO");
+                    CONEXION.commit();
+                    cargar_tablas();
+
+                    System.out.println(1 + "-" + Integer.parseInt(VISTA.jlCODIGO.getText()) + "-" + VISTA.dtINICIO.getText() + "-" + VISTA.dtLLEGADA.getText() + "-" + VISTA.txtCARGA.getText() + "-" + Integer.parseInt(VISTA.txtbORIGEN.getText()) + "-" + Integer.parseInt(VISTA.txtbDESTINO.getText()) + "-" + VISTA.txtbCHOFER.getText() + "-" + VISTA.txtbCAMION.getText());
+                } else {
+                    {
+                        JOptionPane.showMessageDialog(null, "EL VIAJE INGRESADO YA SE ENCUENTRA REGISTRADO");
+
+                    }
+
+                }
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR TODOS LOS CAMPOS");
+        }
+    }
+
+    protected void editar_registro() {
+        try {
+
+            if (Modelo.OAD_VIAJE.PROCEDIMIENTO(2, Integer.parseInt(VISTA.jlCODIGO.getText()), VISTA.dtINICIO.getText(), VISTA.dtLLEGADA.getText(), VISTA.txtCARGA.getText(), Integer.parseInt(VISTA.txtbORIGEN.getText()), Integer.parseInt(VISTA.txtbDESTINO.getText()), VISTA.txtbCHOFER.getText(), VISTA.txtbCAMION.getText()) == true) {
+                JOptionPane.showMessageDialog(null, "REGISTRO EDITADO");
+                CONEXION.commit();
+                cargar_tablas();
+
+                System.out.println(1 + "-" + Integer.parseInt(VISTA.jlCODIGO.getText()) + "-" + VISTA.dtINICIO.getText() + "-" + VISTA.dtLLEGADA.getText() + "-" + VISTA.txtCARGA.getText() + "-" + Integer.parseInt(VISTA.txtbORIGEN.getText()) + "-" + Integer.parseInt(VISTA.txtbDESTINO.getText()) + "-" + VISTA.txtbCHOFER.getText() + "-" + VISTA.txtbCAMION.getText());
+            } else {
+                {
+                    JOptionPane.showMessageDialog(null, "EL VIAJE INGRESADO YA SE ENCUENTRA REGISTRADO");
+
+                }
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR TODOS LOS CAMPOS");
+        }
+    }
+
+    protected void eliminar_registro() {
+        try {
+
+            if (Modelo.OAD_VIAJE.PROCEDIMIENTO(2, Integer.parseInt(VISTA.jlCODIGO.getText()), VISTA.dtINICIO.getText(), VISTA.dtLLEGADA.getText(), VISTA.txtCARGA.getText(), Integer.parseInt(VISTA.txtbORIGEN.getText()), Integer.parseInt(VISTA.txtbDESTINO.getText()), VISTA.txtbCHOFER.getText(), VISTA.txtbCAMION.getText()) == true) {
+                JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO");
+                CONEXION.commit();
+                cargar_tablas();
+
+                System.out.println(1 + "-" + Integer.parseInt(VISTA.jlCODIGO.getText()) + "-" + VISTA.dtINICIO.getText() + "-" + VISTA.dtLLEGADA.getText() + "-" + VISTA.txtCARGA.getText() + "-" + Integer.parseInt(VISTA.txtbORIGEN.getText()) + "-" + Integer.parseInt(VISTA.txtbDESTINO.getText()) + "-" + VISTA.txtbCHOFER.getText() + "-" + VISTA.txtbCAMION.getText());
+            } else {
+                {
+                    JOptionPane.showMessageDialog(null, "EL VIAJE INGRESADO YA SE ENCUENTRA REGISTRADO");
+
+                }
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR TODOS LOS CAMPOS");
+        }
+    }
+
+    public void setear() {
+        int fsel = VISTA.jtLISTA.getSelectedRow();
+
+        if (fsel == -1) {
+
+        } else {
+
+            if (VISTA.RB_AGREGAR.isSelected()) {
+            } else {
+                VISTA.jlCODIGO.setText(VISTA.jtLISTA.getValueAt(fsel, 0).toString());
+                VISTA.dtINICIO.setText(VISTA.jtLISTA.getValueAt(fsel, 1).toString());
+                VISTA.dtLLEGADA.setText(VISTA.jtLISTA.getValueAt(fsel, 2).toString());
+                try {
+                    VISTA.txtCARGA.setText(VISTA.jtLISTA.getValueAt(fsel, 3).toString());
+                } catch (Exception ex) {
+                    VISTA.txtCARGA.setText("");
+                }
+                VISTA.txtbORIGEN.setText(VISTA.jtLISTA.getValueAt(fsel, 4).toString());
+                VISTA.txtbDESTINO.setText(VISTA.jtLISTA.getValueAt(fsel, 5).toString());
+                VISTA.txtbCHOFER.setText(VISTA.jtLISTA.getValueAt(fsel, 6).toString());
+                VISTA.txtbCAMION.setText(VISTA.jtLISTA.getValueAt(fsel, 7).toString());
+
             }
         }
 

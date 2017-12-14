@@ -16,6 +16,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -97,7 +104,7 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
         }
 
         if (e.getSource() == VISTA.txtNOMBRE) {
-            if (METODOS_TEXTFIELD.SoloLetras(e, VISTA.txtNOMBRE.getText(), 5) == true) {
+            if (METODOS_TEXTFIELD.SoloLetras(e, VISTA.txtNOMBRE.getText(), 50) == true) {
             } else {
                 e.consume();
 
@@ -105,7 +112,7 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
         }
 
         if (e.getSource() == VISTA.txtAPELLIDO) {
-            if (METODOS_TEXTFIELD.SoloLetras(e, VISTA.txtAPELLIDO.getText(), 5) == true) {
+            if (METODOS_TEXTFIELD.SoloLetras(e, VISTA.txtAPELLIDO.getText(), 50) == true) {
             } else {
                 e.consume();
 
@@ -151,11 +158,12 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
 
     protected void insertar_registro() {
         try {
-
+            DateFormat fecha_retorno = new SimpleDateFormat("dd/mm/yyyy");
             if (METODOS_TEXTFIELD.validarRut(VISTA.txtRUT.getText()) == true) {
                 if (Modelo.OAD_CHOFER.VERIFICAR_CHOFER(VISTA.txtRUT.getText()) == true) {
 
-                    if (Modelo.OAD_CHOFER.PROCEDIMIENTO(1, VISTA.txtRUT.getText(), VISTA.txtNOMBRE.getText(), VISTA.txtAPELLIDO.getText(), VISTA.txtINGRESO.getText()) == true) {
+                    if (Modelo.OAD_CHOFER.PROCEDIMIENTO(1, VISTA.txtRUT.getText(), VISTA.txtNOMBRE.getText(), VISTA.txtAPELLIDO.getText(), fecha_retorno.format(VISTA.txtINGRESO.getDate())) == true) {
+
                         JOptionPane.showMessageDialog(null, "REGISTRO INSERTADO");
                         CONEXION.commit();
                         cargar_tabla();
@@ -173,7 +181,6 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
                     CONEXION.commit();
                     cargar_tabla();
                     limpiacampos();
-                    
 
                 }
 
@@ -191,8 +198,8 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
     protected boolean editar_registro() {
         boolean validar = false;
         try {
-
-            if (Modelo.OAD_CHOFER.PROCEDIMIENTO(2, VISTA.txtRUT.getText(), VISTA.txtNOMBRE.getText(), VISTA.txtAPELLIDO.getText(), VISTA.txtINGRESO.getText()) == true) {
+            DateFormat fecha_retorno = new SimpleDateFormat("dd/mm/yyyy");
+            if (Modelo.OAD_CHOFER.PROCEDIMIENTO(2, VISTA.txtRUT.getText(), VISTA.txtNOMBRE.getText(), VISTA.txtAPELLIDO.getText(), fecha_retorno.format(VISTA.txtINGRESO.getDate())) == true) {
                 CONEXION.commit();
                 cargar_tabla();
                 limpiacampos();
@@ -293,10 +300,20 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
 
         } else {
             if (VISTA.RB_AGREGAR.isSelected()) {
+
             } else {
                 VISTA.txtRUT.setText(VISTA.jtLISTA.getValueAt(fsel, 0).toString());
                 VISTA.txtNOMBRE.setText(VISTA.jtLISTA.getValueAt(fsel, 1).toString());
                 VISTA.txtAPELLIDO.setText(VISTA.jtLISTA.getValueAt(fsel, 2).toString());
+                String FECH = VISTA.jtLISTA.getValueAt(fsel, 3).toString();
+                try {
+                    Date dia = new SimpleDateFormat("dd/mm/yyyy").parse(FECH);
+                    VISTA.txtINGRESO.setDate(dia);
+                } catch (ParseException ex) {
+                    Logger.getLogger(CRUD_CHOFER.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
+
             }
         }
     }

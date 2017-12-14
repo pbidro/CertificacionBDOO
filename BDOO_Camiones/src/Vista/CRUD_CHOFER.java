@@ -6,8 +6,15 @@
 package Vista;
 
 import Controlador.CONT_CHOFER;
+import Controlador.CONT_VIAJE;
+import Modelo.OAD_VIAJE;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -50,7 +57,7 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
         btnCRUD = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtNOMBRE = new javax.swing.JTextField();
-        txtINGRESO = new datechooser.beans.DateChooserCombo();
+        txtINGRESO = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         txtBUSQUEDA = new javax.swing.JTextField();
         RB_AGREGAR = new javax.swing.JRadioButton();
@@ -61,8 +68,9 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jTree1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(250, 107, 107));
+        setUndecorated(true);
 
         btnVOLVER.setText("VOLVER");
         btnVOLVER.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +90,14 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtLISTA = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        jtLISTA.setFocusable(false);
+        jtLISTA.getTableHeader().setResizingAllowed(false);
+        jtLISTA.getTableHeader().setReorderingAllowed(false);
         jtLISTA.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtLISTAMouseClicked(evt);
@@ -123,8 +139,7 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
             }
         });
 
-        txtINGRESO.setCalendarPreferredSize(new java.awt.Dimension(400, 200));
-        txtINGRESO.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 9));
+        txtINGRESO.setDateFormatString("dd/mm/yyyy");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -290,7 +305,10 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNOMBREKeyTyped
 
     private void btnVOLVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVOLVERActionPerformed
-        // TODO add your handling code here:
+        INDEX VISTA = new INDEX();
+        VISTA.setVisible(true);
+        VISTA.setLocationRelativeTo(null);
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnVOLVERActionPerformed
 
     private void jtLISTAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLISTAMouseClicked
@@ -348,6 +366,13 @@ setear();
                 txtRUT.setText(jtLISTA.getValueAt(fsel, 0).toString());
                 txtNOMBRE.setText(jtLISTA.getValueAt(fsel, 1).toString());
                 txtAPELLIDO.setText(jtLISTA.getValueAt(fsel, 2).toString());
+                String FECH = jtLISTA.getValueAt(fsel, 3).toString();
+                try {
+                    Date dia = new SimpleDateFormat("dd/mm/yyyy").parse(FECH);
+                    txtINGRESO.setDate(dia);
+                } catch (ParseException ex) {
+                    Logger.getLogger(CRUD_CHOFER.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 
@@ -375,7 +400,7 @@ setear();
     public javax.swing.JTable jtLISTA;
     public javax.swing.JTextField txtAPELLIDO;
     public javax.swing.JTextField txtBUSQUEDA;
-    public datechooser.beans.DateChooserCombo txtINGRESO;
+    public com.toedter.calendar.JDateChooser txtINGRESO;
     public javax.swing.JTextField txtNOMBRE;
     public javax.swing.JTextField txtRUT;
     // End of variables declaration//GEN-END:variables

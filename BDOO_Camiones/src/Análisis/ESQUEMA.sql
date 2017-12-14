@@ -100,6 +100,8 @@ CREATE TABLE VIAJE OF T_VIAJE (
 	SCOPE FOR (DESTINO) IS UBICACION)
 OBJECT IDENTIFIER IS PRIMARY KEY;
 
+-- ALTER TABLE VIAJE ADD PRIMARY KEY (CODIGO,CAMION,CHOFER);
+
 CREATE TABLE LOG OF T_LOG;
 
 --------------------------------------------------------------------------------
@@ -168,5 +170,7 @@ TOTAL_VIAJES NUMBER;
 
 END;
 /
+
+
 
 

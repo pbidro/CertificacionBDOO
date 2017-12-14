@@ -49,7 +49,7 @@ public class OAD_CHOFER {
     }
 
     public static DefaultTableModel CARGARDATOS(String FILTRO) {
-        String sql = "SELECT A.RUT, A.NOMBRE, A.APELLIDO, A.FECHA_INGRESO, A.CATEGORIA() AS CARGO, A.TOTALVIAJES() AS VIAJES FROM CHOFER A WHERE A.ESTADO = 1";
+        String sql = "SELECT A.RUT, A.NOMBRE, A.APELLIDO, TO_CHAR(A.FECHA_INGRESO,'DD/MM/YYYY') AS FECHA_INGRESO, A.CATEGORIA() AS CARGO, A.TOTALVIAJES() AS VIAJES FROM CHOFER A WHERE A.ESTADO = 1";
         String[] titulos = {"RUT", "Nombre", "Apellido", "Ingreso", "Cargo", "Viajes"};
         DefaultTableModel model = new DefaultTableModel(null, titulos);
         String[] fila = new String[6];

@@ -53,7 +53,7 @@ public class OAD_VIAJE {
     }
 
     public static DefaultTableModel CARGARDATOS() {
-        String sql = "SELECT A.CODIGO AS A, A.FECHA_INICIO AS B, A.FECHA_LLEGADA AS C, A.CARGA AS D, A.ORIGEN.CODIGO AS E, A.DESTINO.CODIGO AS F, A.CHOFER.RUT AS G, A.CAMION.PATENTE AS H FROM VIAJE A WHERE A.ESTADO = 1";
+        String sql = "SELECT A.CODIGO AS A, TO_CHAR(A.FECHA_INICIO,'DD/MM/YYYY') AS B, TO_CHAR(A.FECHA_LLEGADA,'DD/MM/YYYY') AS C, A.CARGA AS D, A.ORIGEN.CODIGO AS E, A.DESTINO.CODIGO AS F, A.CHOFER.RUT AS G, A.CAMION.PATENTE AS H FROM VIAJE A WHERE A.ESTADO = 1";
         String[] titulos = {"CODIGO", "IDA", "REGRESO", "CARGA", "ORIGEN", "DESTINO", "CHOFER", "CAMION"};
         DefaultTableModel model = new DefaultTableModel(null, titulos);
         String[] fila = new String[8];
