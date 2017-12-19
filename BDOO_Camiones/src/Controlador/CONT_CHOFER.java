@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,8 +34,10 @@ import javax.swing.JOptionPane;
  *
  * @author Koe
  */
-public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
+public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
 
+    int xMouse;
+    int yMouse;
     CRUD_CHOFER VISTA = new CRUD_CHOFER();
     OAD_CHOFER MODELO = new OAD_CHOFER();
 
@@ -50,6 +53,9 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
         this.VISTA.RB_AGREGAR.addMouseListener(this);
         this.VISTA.RB_EDITAR.addMouseListener(this);
         this.VISTA.RB_ELIMINAR.addMouseListener(this);
+        this.VISTA.MDRAG.addMouseListener(this);
+        this.VISTA.MDRAG.addMouseMotionListener(this);
+
         initComponents();
     }
 
@@ -198,7 +204,7 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
     protected boolean editar_registro() {
         boolean validar = false;
         try {
-            DateFormat fecha_retorno = new SimpleDateFormat("dd/mm/yyyy");
+            DateFormat fecha_retorno = new SimpleDateFormat("dd/MM/yyyy");
             if (Modelo.OAD_CHOFER.PROCEDIMIENTO(2, VISTA.txtRUT.getText(), VISTA.txtNOMBRE.getText(), VISTA.txtAPELLIDO.getText(), fecha_retorno.format(VISTA.txtINGRESO.getDate())) == true) {
                 CONEXION.commit();
                 cargar_tabla();
@@ -240,6 +246,10 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        if (e.getSource() == VISTA.MDRAG) {
+            xMouse = e.getX();
+            yMouse = e.getY();
+        }
     }
 
     @Override
@@ -307,7 +317,7 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
                 VISTA.txtAPELLIDO.setText(VISTA.jtLISTA.getValueAt(fsel, 2).toString());
                 String FECH = VISTA.jtLISTA.getValueAt(fsel, 3).toString();
                 try {
-                    Date dia = new SimpleDateFormat("dd/mm/yyyy").parse(FECH);
+                    Date dia = new SimpleDateFormat("dd/MM/yyyy").parse(FECH);
                     VISTA.txtINGRESO.setDate(dia);
                 } catch (ParseException ex) {
                     Logger.getLogger(CRUD_CHOFER.class.getName()).log(Level.SEVERE, null, ex);
@@ -316,6 +326,24 @@ public class CONT_CHOFER implements ActionListener, KeyListener, MouseListener {
 
             }
         }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+        if (e.getSource() == VISTA.MDRAG) {
+
+            int x = e.getXOnScreen();
+            int y = e.getYOnScreen();
+
+            VISTA.setLocation(x-xMouse, y-yMouse);
+        }
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 
 }

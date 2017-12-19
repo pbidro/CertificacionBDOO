@@ -18,14 +18,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Koe
  */
-public class CONT_CAMION implements ActionListener, KeyListener, MouseListener {
+public class CONT_CAMION implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
 
+    int xMouse;
+    int yMouse;
     CRUD_CAMION VISTA = new CRUD_CAMION();
     OAD_CAMION MODELO = new OAD_CAMION();
 
@@ -43,6 +46,8 @@ public class CONT_CAMION implements ActionListener, KeyListener, MouseListener {
         this.VISTA.RB_AGREGAR.addMouseListener(this);
         this.VISTA.RB_EDITAR.addMouseListener(this);
         this.VISTA.RB_ELIMINAR.addMouseListener(this);
+        this.VISTA.MDRAG.addMouseListener(this);
+        this.VISTA.MDRAG.addMouseMotionListener(this);
         initComponents();
 
     }
@@ -93,7 +98,7 @@ public class CONT_CAMION implements ActionListener, KeyListener, MouseListener {
         try {
             if (e.getSource() == VISTA.txtBUSQUEDA) {
 
-                METODOS_TABLAS.filtrar_tabla(VISTA.jtLISTA, VISTA.txtBUSQUEDA.getText(),0);
+                METODOS_TABLAS.filtrar_tabla(VISTA.jtLISTA, VISTA.txtBUSQUEDA.getText(), 0);
             }
 
         } catch (Exception ex) {
@@ -107,6 +112,10 @@ public class CONT_CAMION implements ActionListener, KeyListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        if (e.getSource() == VISTA.MDRAG) {
+            xMouse = e.getX();
+            yMouse = e.getY();
+        }
     }
 
     @Override
@@ -266,6 +275,20 @@ public class CONT_CAMION implements ActionListener, KeyListener, MouseListener {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR");
         }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if (e.getSource() == VISTA.MDRAG) {
+
+            int x = e.getXOnScreen();
+            int y = e.getYOnScreen();
+
+            VISTA.setLocation(x-xMouse, y-yMouse);
+        }    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
     }
 
 }

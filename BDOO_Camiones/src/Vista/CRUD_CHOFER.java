@@ -65,10 +65,11 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
         RB_ELIMINAR = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
         jcbPARAMETRO = new javax.swing.JComboBox<>();
+        MDRAG = new javax.swing.JLabel();
 
         jScrollPane2.setViewportView(jTree1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(250, 107, 107));
         setUndecorated(true);
 
@@ -139,7 +140,7 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
             }
         });
 
-        txtINGRESO.setDateFormatString("dd/mm/yyyy");
+        txtINGRESO.setDateFormatString("dd/MM/yyyy");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,15 +224,6 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnVOLVER, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,11 +252,22 @@ public class CRUD_CHOFER extends javax.swing.JFrame {
                                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtBUSQUEDA, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(89, 89, 89))))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVOLVER, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(44, Short.MAX_VALUE))
+            .addComponent(MDRAG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(MDRAG, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
@@ -368,7 +371,7 @@ setear();
                 txtAPELLIDO.setText(jtLISTA.getValueAt(fsel, 2).toString());
                 String FECH = jtLISTA.getValueAt(fsel, 3).toString();
                 try {
-                    Date dia = new SimpleDateFormat("dd/mm/yyyy").parse(FECH);
+                    Date dia = new SimpleDateFormat("dd/MM/yyyy").parse(FECH);
                     txtINGRESO.setDate(dia);
                 } catch (ParseException ex) {
                     Logger.getLogger(CRUD_CHOFER.class.getName()).log(Level.SEVERE, null, ex);
@@ -379,6 +382,7 @@ setear();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel MDRAG;
     public javax.swing.JRadioButton RB_AGREGAR;
     public javax.swing.JRadioButton RB_EDITAR;
     public javax.swing.JRadioButton RB_ELIMINAR;

@@ -56,6 +56,7 @@ public class CRUD_CAMION extends javax.swing.JFrame {
         jtLISTA = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         txtBUSQUEDA = new javax.swing.JTextField();
+        MDRAG = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,7 +71,7 @@ public class CRUD_CAMION extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(536, 607));
 
@@ -243,13 +244,15 @@ public class CRUD_CAMION extends javax.swing.JFrame {
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtBUSQUEDA, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 35, Short.MAX_VALUE)))
+                        .addGap(0, 35, Short.MAX_VALUE))
+                    .addComponent(MDRAG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addComponent(MDRAG, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
@@ -265,7 +268,7 @@ public class CRUD_CAMION extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(txtBUSQUEDA, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVOLVER)
                 .addGap(6, 6, 6))
@@ -289,6 +292,7 @@ public class CRUD_CAMION extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel MDRAG;
     public javax.swing.JRadioButton RB_AGREGAR;
     public javax.swing.JRadioButton RB_EDITAR;
     public javax.swing.JRadioButton RB_ELIMINAR;

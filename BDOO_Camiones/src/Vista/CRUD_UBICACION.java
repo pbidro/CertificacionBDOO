@@ -5,6 +5,13 @@
  */
 package Vista;
 
+import Controlador.CONT_CHOFER;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Koe
@@ -38,8 +45,11 @@ public class CRUD_UBICACION extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         RB_AGREGAR = new javax.swing.JRadioButton();
         RB_ELIMINAR = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtCODIGO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel1.setText("UBICACION:");
 
@@ -49,7 +59,7 @@ public class CRUD_UBICACION extends javax.swing.JFrame {
             }
         });
 
-        btnCRUD.setText("INSERTAR");
+        btnCRUD.setText("AGREGAR");
         btnCRUD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCRUDActionPerformed(evt);
@@ -74,6 +84,11 @@ public class CRUD_UBICACION extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtLISTA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtLISTAMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtLISTA);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -91,6 +106,10 @@ public class CRUD_UBICACION extends javax.swing.JFrame {
 
         buttonGroup1.add(RB_ELIMINAR);
         RB_ELIMINAR.setText("ELIMINAR");
+
+        jLabel2.setText("CODIGO:");
+
+        txtCODIGO.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,20 +129,24 @@ public class CRUD_UBICACION extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(btnCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(RB_AGREGAR)
-                        .addGap(63, 63, 63)
-                        .addComponent(RB_ELIMINAR))
                     .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtDESCRIPCION, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCODIGO))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(RB_AGREGAR)
+                        .addGap(63, 63, 63)
+                        .addComponent(RB_ELIMINAR)))
                 .addGap(147, 147, 147))
         );
         layout.setVerticalGroup(
@@ -137,7 +160,11 @@ public class CRUD_UBICACION extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RB_AGREGAR)
                     .addComponent(RB_ELIMINAR))
-                .addGap(19, 19, 19)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCODIGO)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtDESCRIPCION, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -145,7 +172,7 @@ public class CRUD_UBICACION extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCRUD)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addComponent(btnVOLVER)
                 .addContainerGap())
         );
@@ -167,6 +194,10 @@ public class CRUD_UBICACION extends javax.swing.JFrame {
         VISTA.setLocationRelativeTo(null);
         this.dispose();          
     }//GEN-LAST:event_btnVOLVERActionPerformed
+
+    private void jtLISTAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtLISTAMouseClicked
+setear();        // TODO add your handling code here:
+    }//GEN-LAST:event_jtLISTAMouseClicked
 
     /**
      * @param args the command line arguments
@@ -202,6 +233,24 @@ public class CRUD_UBICACION extends javax.swing.JFrame {
             }
         });
     }
+    
+        public void setear() {
+        int fsel = jtLISTA.getSelectedRow();
+
+        if (fsel == -1) {
+
+        } else {
+            CONT_CHOFER CCH = new CONT_CHOFER();
+            if (RB_AGREGAR.isSelected()) {
+            } else {
+
+                CCH.limpiacampos();
+                txtCODIGO.setText(jtLISTA.getValueAt(fsel, 0).toString());
+                txtDESCRIPCION.setText(jtLISTA.getValueAt(fsel, 1).toString());
+            }
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JRadioButton RB_AGREGAR;
@@ -210,10 +259,12 @@ public class CRUD_UBICACION extends javax.swing.JFrame {
     public javax.swing.JButton btnVOLVER;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jtLISTA;
+    public javax.swing.JLabel txtCODIGO;
     public javax.swing.JTextField txtDESCRIPCION;
     // End of variables declaration//GEN-END:variables
 }

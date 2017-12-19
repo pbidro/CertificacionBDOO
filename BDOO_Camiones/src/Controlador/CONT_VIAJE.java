@@ -11,6 +11,7 @@ import Modelo.OAD_CAMION;
 import Modelo.OAD_CHOFER;
 import Modelo.OAD_UBICACION;
 import Modelo.OAD_VIAJE;
+import Vista.CRUD_CHOFER;
 import Vista.CRUD_VIAJE;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -248,17 +255,16 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
 
     protected void insertar_registro() {
         try {
-
+            DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
             if (VISTA.txtbCHOFER.isEnabled() || VISTA.txtbCAMION.isEnabled() || VISTA.txtbDESTINO.isEnabled() || VISTA.txtbORIGEN.isEnabled()) {
 
             } else {
 
-                if (Modelo.OAD_VIAJE.PROCEDIMIENTO(1, Integer.parseInt(VISTA.jlCODIGO.getText()), VISTA.dtINICIO.getText(), VISTA.dtLLEGADA.getText(), VISTA.txtCARGA.getText(), Integer.parseInt(VISTA.txtbORIGEN.getText()), Integer.parseInt(VISTA.txtbDESTINO.getText()), VISTA.txtbCHOFER.getText(), VISTA.txtbCAMION.getText()) == true) {
+                if (Modelo.OAD_VIAJE.PROCEDIMIENTO(1, Integer.parseInt(VISTA.jlCODIGO.getText()), fecha.format(VISTA.dtINICIO.getDate()), fecha.format(VISTA.dtLLEGADA.getDate()), VISTA.txtCARGA.getText(), Integer.parseInt(VISTA.txtbORIGEN.getText()), Integer.parseInt(VISTA.txtbDESTINO.getText()), VISTA.txtbCHOFER.getText(), VISTA.txtbCAMION.getText()) == true) {
                     JOptionPane.showMessageDialog(null, "REGISTRO INSERTADO");
                     CONEXION.commit();
                     cargar_tablas();
 
-                    System.out.println(1 + "-" + Integer.parseInt(VISTA.jlCODIGO.getText()) + "-" + VISTA.dtINICIO.getText() + "-" + VISTA.dtLLEGADA.getText() + "-" + VISTA.txtCARGA.getText() + "-" + Integer.parseInt(VISTA.txtbORIGEN.getText()) + "-" + Integer.parseInt(VISTA.txtbDESTINO.getText()) + "-" + VISTA.txtbCHOFER.getText() + "-" + VISTA.txtbCAMION.getText());
                 } else {
                     {
                         JOptionPane.showMessageDialog(null, "EL VIAJE INGRESADO YA SE ENCUENTRA REGISTRADO");
@@ -275,13 +281,13 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
 
     protected void editar_registro() {
         try {
+            DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
 
-            if (Modelo.OAD_VIAJE.PROCEDIMIENTO(2, Integer.parseInt(VISTA.jlCODIGO.getText()), VISTA.dtINICIO.getText(), VISTA.dtLLEGADA.getText(), VISTA.txtCARGA.getText(), Integer.parseInt(VISTA.txtbORIGEN.getText()), Integer.parseInt(VISTA.txtbDESTINO.getText()), VISTA.txtbCHOFER.getText(), VISTA.txtbCAMION.getText()) == true) {
+            if (Modelo.OAD_VIAJE.PROCEDIMIENTO(2, Integer.parseInt(VISTA.jlCODIGO.getText()), fecha.format(VISTA.dtINICIO.getDate()), fecha.format(VISTA.dtLLEGADA.getDate()), VISTA.txtCARGA.getText(), Integer.parseInt(VISTA.txtbORIGEN.getText()), Integer.parseInt(VISTA.txtbDESTINO.getText()), VISTA.txtbCHOFER.getText(), VISTA.txtbCAMION.getText()) == true) {
                 JOptionPane.showMessageDialog(null, "REGISTRO EDITADO");
                 CONEXION.commit();
                 cargar_tablas();
 
-                System.out.println(1 + "-" + Integer.parseInt(VISTA.jlCODIGO.getText()) + "-" + VISTA.dtINICIO.getText() + "-" + VISTA.dtLLEGADA.getText() + "-" + VISTA.txtCARGA.getText() + "-" + Integer.parseInt(VISTA.txtbORIGEN.getText()) + "-" + Integer.parseInt(VISTA.txtbDESTINO.getText()) + "-" + VISTA.txtbCHOFER.getText() + "-" + VISTA.txtbCAMION.getText());
             } else {
                 {
                     JOptionPane.showMessageDialog(null, "EL VIAJE INGRESADO YA SE ENCUENTRA REGISTRADO");
@@ -296,14 +302,14 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
     }
 
     protected void eliminar_registro() {
+        
         try {
-
-            if (Modelo.OAD_VIAJE.PROCEDIMIENTO(2, Integer.parseInt(VISTA.jlCODIGO.getText()), VISTA.dtINICIO.getText(), VISTA.dtLLEGADA.getText(), VISTA.txtCARGA.getText(), Integer.parseInt(VISTA.txtbORIGEN.getText()), Integer.parseInt(VISTA.txtbDESTINO.getText()), VISTA.txtbCHOFER.getText(), VISTA.txtbCAMION.getText()) == true) {
+            DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+            if (Modelo.OAD_VIAJE.PROCEDIMIENTO(3, Integer.parseInt(VISTA.jlCODIGO.getText()), fecha.format(VISTA.dtINICIO.getDate()), fecha.format(VISTA.dtLLEGADA.getDate()), VISTA.txtCARGA.getText(), Integer.parseInt(VISTA.txtbORIGEN.getText()), Integer.parseInt(VISTA.txtbDESTINO.getText()), VISTA.txtbCHOFER.getText(), VISTA.txtbCAMION.getText()) == true) {
                 JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO");
                 CONEXION.commit();
                 cargar_tablas();
 
-                System.out.println(1 + "-" + Integer.parseInt(VISTA.jlCODIGO.getText()) + "-" + VISTA.dtINICIO.getText() + "-" + VISTA.dtLLEGADA.getText() + "-" + VISTA.txtCARGA.getText() + "-" + Integer.parseInt(VISTA.txtbORIGEN.getText()) + "-" + Integer.parseInt(VISTA.txtbDESTINO.getText()) + "-" + VISTA.txtbCHOFER.getText() + "-" + VISTA.txtbCAMION.getText());
             } else {
                 {
                     JOptionPane.showMessageDialog(null, "EL VIAJE INGRESADO YA SE ENCUENTRA REGISTRADO");
@@ -327,8 +333,22 @@ public class CONT_VIAJE implements ActionListener, KeyListener, MouseListener {
             if (VISTA.RB_AGREGAR.isSelected()) {
             } else {
                 VISTA.jlCODIGO.setText(VISTA.jtLISTA.getValueAt(fsel, 0).toString());
-                VISTA.dtINICIO.setText(VISTA.jtLISTA.getValueAt(fsel, 1).toString());
-                VISTA.dtLLEGADA.setText(VISTA.jtLISTA.getValueAt(fsel, 2).toString());
+                
+                
+                String FECHINI = VISTA.jtLISTA.getValueAt(fsel, 1).toString();
+                String FECHLLEG = VISTA.jtLISTA.getValueAt(fsel, 2).toString();
+                try {
+                    Date ini = new SimpleDateFormat("dd/MM/yyyy").parse(FECHINI);
+                    Date lleg = new SimpleDateFormat("dd/MM/yyyy").parse(FECHLLEG);
+                    VISTA.dtINICIO.setDate(ini);
+                    VISTA.dtLLEGADA.setDate(lleg);
+                } catch (ParseException ex) {
+                    Logger.getLogger(CRUD_CHOFER.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
+                
+                
+                
                 try {
                     VISTA.txtCARGA.setText(VISTA.jtLISTA.getValueAt(fsel, 3).toString());
                 } catch (Exception ex) {

@@ -6,6 +6,11 @@
 package Vista;
 
 import Controlador.CONT_CHOFER;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +22,10 @@ public class CRUD_VIAJE extends javax.swing.JFrame {
      * Creates new form CRUD_VIAJE
      */
     public CRUD_VIAJE() {
+        
+                getContentPane().setBackground(new java.awt.Color(24, 147, 219));
+
+       
         initComponents();
     }
 
@@ -56,11 +65,9 @@ public class CRUD_VIAJE extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtORIGEN = new javax.swing.JTable();
         txtbORIGEN = new javax.swing.JTextField();
-        dtLLEGADA = new datechooser.beans.DateChooserCombo();
         btnpORIGEN = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtDESTINO = new javax.swing.JTable();
-        dtINICIO = new datechooser.beans.DateChooserCombo();
         txtbDESTINO = new javax.swing.JTextField();
         btnpDESTINO = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -69,10 +76,10 @@ public class CRUD_VIAJE extends javax.swing.JFrame {
         btnCRUD = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jlCODIGO = new javax.swing.JLabel();
-        dtBUSQUEDA = new datechooser.beans.DateChooserCombo();
-        jLabel10 = new javax.swing.JLabel();
+        dtINICIO = new com.toedter.calendar.JDateChooser();
+        dtLLEGADA = new com.toedter.calendar.JDateChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         btnVOLVER.setText("VOLVER");
@@ -119,6 +126,7 @@ public class CRUD_VIAJE extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(jtLISTA);
 
+        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnpCHOFER.setText("ESCOGER");
@@ -183,8 +191,6 @@ public class CRUD_VIAJE extends javax.swing.JFrame {
 
         txtbORIGEN.setText(" ");
 
-        dtLLEGADA.setMinDate(dtINICIO.getSelectedDate());
-
         btnpORIGEN.setText("ESCOGER");
 
         jtDESTINO.setModel(new javax.swing.table.DefaultTableModel(
@@ -230,6 +236,10 @@ public class CRUD_VIAJE extends javax.swing.JFrame {
 
         jlCODIGO.setText("0");
 
+        dtINICIO.setDateFormatString("dd/MM/yyyy");
+
+        dtLLEGADA.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -243,17 +253,17 @@ public class CRUD_VIAJE extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(dtINICIO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel1))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel1)
+                                            .addComponent(dtINICIO, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(dtLLEGADA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel2)
                                                 .addGap(125, 125, 125)
                                                 .addComponent(jLabel11)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jlCODIGO))))
+                                                .addComponent(jlCODIGO))
+                                            .addComponent(dtLLEGADA, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jLabel3))
                                 .addGap(19, 19, 19))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -353,8 +363,6 @@ public class CRUD_VIAJE extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel10.setText("BUSQUEDA DE VIAJES POR FECHA:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -377,11 +385,7 @@ public class CRUD_VIAJE extends javax.swing.JFrame {
                                         .addComponent(RB_EDITAR)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(RB_ELIMINAR))))
-                            .addComponent(btnVOLVER, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dtBUSQUEDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnVOLVER, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -400,11 +404,7 @@ public class CRUD_VIAJE extends javax.swing.JFrame {
                     .addComponent(RB_ELIMINAR))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(dtBUSQUEDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVOLVER))
@@ -482,11 +482,9 @@ setear();
     public javax.swing.JButton btnpDESTINO;
     public javax.swing.JButton btnpORIGEN;
     private javax.swing.ButtonGroup buttonGroup1;
-    public datechooser.beans.DateChooserCombo dtBUSQUEDA;
-    public datechooser.beans.DateChooserCombo dtINICIO;
-    public datechooser.beans.DateChooserCombo dtLLEGADA;
+    public com.toedter.calendar.JDateChooser dtINICIO;
+    public com.toedter.calendar.JDateChooser dtLLEGADA;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -526,8 +524,28 @@ setear();
             if (RB_AGREGAR.isSelected()) {
             } else {
                 jlCODIGO.setText(jtLISTA.getValueAt(fsel, 0).toString());
-                dtINICIO.setText(jtLISTA.getValueAt(fsel, 1).toString());
-                dtLLEGADA.setText(jtLISTA.getValueAt(fsel, 2).toString());
+                
+                
+                
+
+                
+                
+                
+                String FECHINI = jtLISTA.getValueAt(fsel, 1).toString();
+                String FECHLLEG = jtLISTA.getValueAt(fsel, 2).toString();
+                try {
+                    Date ini = new SimpleDateFormat("dd/MM/yyyy").parse(FECHINI);
+                    Date lleg = new SimpleDateFormat("dd/MM/yyyy").parse(FECHLLEG);
+                    dtINICIO.setDate(ini);
+                    dtLLEGADA.setDate(lleg);
+                } catch (ParseException ex) {
+                    Logger.getLogger(CRUD_CHOFER.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
+                
+                
+                
+                
                 try{txtCARGA.setText(jtLISTA.getValueAt(fsel, 3).toString());}
                 catch(Exception ex){
                     txtCARGA.setText("");
