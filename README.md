@@ -1,5 +1,4 @@
-Proyecto para optar a la certificación de desarrollo de bases de datos orienta-
-das a objetos del Instituto Profesional Santo Tomás Talca.
+Proyecto para optar a la certificación de desarrollo de bases de datos orientadas a objetos del Instituto Profesional Santo Tomás Talca.
 
 Autor: Pablo Iván Bustamante Idro.
 Profesor: Claudio Diaz Pacheco.
